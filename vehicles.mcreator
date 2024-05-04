@@ -1,0 +1,49 @@
+{
+  "mod_elements": [
+    {
+      "name": "Cart",
+      "type": "animatedentity",
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "cart",
+      "metadata": {
+        "files": [
+          "src/main/java/net/gabriele/vehicles/entity/CartEntity.java",
+          "src/main/java/net/gabriele/vehicles/entity/model/CartModel.java",
+          "src/main/java/net/gabriele/vehicles/client/renderer/CartRenderer.java"
+        ]
+      }
+    }
+  ],
+  "variable_elements": [],
+  "sound_elements": [],
+  "tag_elements": {},
+  "language_map": {
+    "en_us": {
+      "item.vehicles.cart_spawn_egg": "Cart Spawn Egg",
+      "entity.vehicles.cart": "Cart"
+    }
+  },
+  "foldersRoot": {
+    "name": "~",
+    "children": []
+  },
+  "workspaceSettings": {
+    "modid": "vehicles",
+    "modName": "vehicles",
+    "version": "1.0.0",
+    "author": "Gabriele",
+    "license": "Apache License version 2.0",
+    "serverSideOnly": false,
+    "requiredMods": [],
+    "dependencies": [],
+    "dependants": [],
+    "mcreatorDependencies": [
+      "kleidersplayerrenderer",
+      "geckolib"
+    ],
+    "currentGenerator": "neoforge-1.20.4",
+    "modElementsPackage": "net.gabriele.vehicles"
+  },
+  "mcreatorVersion": 202400118518
+}
