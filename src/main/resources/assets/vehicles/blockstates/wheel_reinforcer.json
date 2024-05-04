@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=north": {
+      "model": "vehicles:block/wheel_reinforcer"
+    },
+    "facing=east": {
+      "model": "vehicles:block/wheel_reinforcer",
+      "y": 90
+    },
+    "facing=south": {
+      "model": "vehicles:block/wheel_reinforcer",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "vehicles:block/wheel_reinforcer",
+      "y": 270
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "_fv": 60,
+  "_type": "villagerprofession",
+  "definition": {
+    "displayName": "Charrioter",
+    "pointOfInterest": {
+      "value": "CUSTOM:WheelReinforcer"
+    },
+    "actionSound": {
+      "value": "entity.villager.work_armorer"
+    },
+    "hat": "None",
+    "professionTextureFile": "charrioter.png",
+    "zombifiedProfessionTextureFile": "charrioter.png"
+  }
+}

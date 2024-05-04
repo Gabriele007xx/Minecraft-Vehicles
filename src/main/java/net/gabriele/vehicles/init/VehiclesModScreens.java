@@ -9,6 +9,7 @@ import net.neoforged.fml.common.Mod;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.api.distmarker.Dist;
 
+import net.gabriele.vehicles.client.gui.WheelReinforcerGUIScreen;
 import net.gabriele.vehicles.client.gui.CartGUIScreen;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
@@ -16,5 +17,6 @@ public class VehiclesModScreens {
 	@SubscribeEvent
 	public static void clientLoad(RegisterMenuScreensEvent event) {
 		event.register(VehiclesModMenus.CART_GUI.get(), CartGUIScreen::new);
+		event.register(VehiclesModMenus.WHEEL_REINFORCER_GUI.get(), WheelReinforcerGUIScreen::new);
 	}
 }

@@ -1,0 +1,13 @@
+{
+  "parent": "block/cube",
+  "textures": {
+    "down": "vehicles:block/wheel_reinforcer_side",
+    "up": "vehicles:block/wheel_reinforcer_top",
+    "north": "vehicles:block/wheel_reinforcer_side",
+    "east": "vehicles:block/wheel_reinforcer_side_1",
+    "south": "vehicles:block/wheel_reinforcer_side",
+    "west": "vehicles:block/wheel_reinforcer_side_1",
+    "particle": "vehicles:block/wheel_reinforcer_side"
+  },
+  "render_type": "solid"
+}

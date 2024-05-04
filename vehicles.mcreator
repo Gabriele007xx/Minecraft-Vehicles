@@ -126,23 +126,102 @@
           }
         ]
       }
+    },
+    {
+      "name": "Charrioter",
+      "type": "villagerprofession",
+      "sortid": 8,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "charrioter",
+      "metadata": {
+        "files": []
+      }
+    },
+    {
+      "name": "CharrioterOffers",
+      "type": "villagertrade",
+      "sortid": 9,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "charrioter_offers",
+      "metadata": {
+        "files": []
+      },
+      "path": "~/charrioter_offers"
+    },
+    {
+      "name": "CartCrafting",
+      "type": "recipe",
+      "sortid": 10,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "cart_crafting",
+      "metadata": {
+        "files": [
+          "src/main/resources/data/vehicles/recipes/cart_crafting.json"
+        ]
+      }
+    },
+    {
+      "name": "WheelReinforcer",
+      "type": "block",
+      "sortid": 11,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "wheel_reinforcer",
+      "metadata": {
+        "files": [
+          "src/main/java/net/gabriele/vehicles/block/WheelReinforcerBlock.java",
+          "src/main/resources/assets/vehicles/models/item/wheel_reinforcer.json",
+          "src/main/resources/assets/vehicles/blockstates/wheel_reinforcer.json",
+          "src/main/resources/assets/vehicles/models/block/wheel_reinforcer.json",
+          "src/main/resources/data/vehicles/loot_tables/blocks/wheel_reinforcer.json"
+        ]
+      }
+    },
+    {
+      "name": "WheelReinforcerGUI",
+      "type": "gui",
+      "sortid": 12,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "wheel_reinforcer_gui",
+      "metadata": {
+        "files": [
+          "src/main/java/net/gabriele/vehicles/client/gui/WheelReinforcerGUIScreen.java",
+          "src/main/java/net/gabriele/vehicles/world/inventory/WheelReinforcerGUIMenu.java"
+        ]
+      }
     }
   ],
   "variable_elements": [],
   "sound_elements": [],
-  "tag_elements": {},
+  "tag_elements": {
+    "BLOCKS:minecraft:mineable/pickaxe": [
+      "~CUSTOM:WheelReinforcer"
+    ]
+  },
   "language_map": {
     "en_us": {
       "item.vehicles.cart_spawn_egg": "Cart Spawn Egg",
+      "gui.vehicles.wheel_reinforcer_gui.label_reinforce": "Reinforce",
       "item.vehicles.wooden_wheel": "Wooden Wheel",
       "item.vehicles.cart_item": "Cart Item",
       "item_group.vehicles.vehicles": "Vehicles",
-      "entity.vehicles.cart": "Cart"
+      "block.vehicles.wheel_reinforcer": "Wheel Reinforcer",
+      "entity.vehicles.cart": "Cart",
+      "entity.minecraft.villager.vehicles.charrioter": "Charrioter"
     }
   },
   "foldersRoot": {
     "name": "~",
-    "children": []
+    "children": [
+      {
+        "name": "charrioter_offers",
+        "children": []
+      }
+    ]
   },
   "workspaceSettings": {
     "modid": "vehicles",

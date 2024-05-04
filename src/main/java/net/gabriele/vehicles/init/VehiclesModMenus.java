@@ -11,10 +11,12 @@ import net.neoforged.neoforge.common.extensions.IMenuTypeExtension;
 import net.minecraft.world.inventory.MenuType;
 import net.minecraft.core.registries.Registries;
 
+import net.gabriele.vehicles.world.inventory.WheelReinforcerGUIMenu;
 import net.gabriele.vehicles.world.inventory.CartGUIMenu;
 import net.gabriele.vehicles.VehiclesMod;
 
 public class VehiclesModMenus {
 	public static final DeferredRegister<MenuType<?>> REGISTRY = DeferredRegister.create(Registries.MENU, VehiclesMod.MODID);
 	public static final DeferredHolder<MenuType<?>, MenuType<CartGUIMenu>> CART_GUI = REGISTRY.register("cart_gui", () -> IMenuTypeExtension.create(CartGUIMenu::new));
+	public static final DeferredHolder<MenuType<?>, MenuType<WheelReinforcerGUIMenu>> WHEEL_REINFORCER_GUI = REGISTRY.register("wheel_reinforcer_gui", () -> IMenuTypeExtension.create(WheelReinforcerGUIMenu::new));
 }

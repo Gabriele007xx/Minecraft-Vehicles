@@ -1,7 +1,10 @@
 {
   "item.vehicles.cart_spawn_egg": "Cart Spawn Egg",
+  "gui.vehicles.wheel_reinforcer_gui.label_reinforce": "Reinforce",
   "item.vehicles.wooden_wheel": "Wooden Wheel",
   "item.vehicles.cart_item": "Cart Item",
   "item_group.vehicles.vehicles": "Vehicles",
-  "entity.vehicles.cart": "Cart"
+  "block.vehicles.wheel_reinforcer": "Wheel Reinforcer",
+  "entity.vehicles.cart": "Cart",
+  "entity.minecraft.villager.vehicles.charrioter": "Charrioter"
 }
