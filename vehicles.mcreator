@@ -3,6 +3,7 @@
     {
       "name": "Cart",
       "type": "animatedentity",
+      "sortid": 2,
       "compiles": true,
       "locked_code": false,
       "registry_name": "cart",
@@ -13,6 +14,118 @@
           "src/main/java/net/gabriele/vehicles/client/renderer/CartRenderer.java"
         ]
       }
+    },
+    {
+      "name": "GetEntityPlayerIsDriing",
+      "type": "procedure",
+      "sortid": 1,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "get_entity_player_is_driving",
+      "metadata": {
+        "return_type": "entity",
+        "files": [
+          "src/main/java/net/gabriele/vehicles/procedures/GetEntityPlayerIsDriingProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CartGUI",
+      "type": "gui",
+      "sortid": 3,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "cart_gui",
+      "metadata": {
+        "files": [
+          "src/main/java/net/gabriele/vehicles/world/inventory/CartGUIMenu.java",
+          "src/main/java/net/gabriele/vehicles/client/gui/CartGUIScreen.java"
+        ]
+      }
+    },
+    {
+      "name": "WoodenWheel",
+      "type": "item",
+      "sortid": 4,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "wooden_wheel",
+      "metadata": {
+        "files": [
+          "src/main/java/net/gabriele/vehicles/item/WoodenWheelItem.java",
+          "src/main/resources/assets/vehicles/models/item/wooden_wheel.json"
+        ]
+      }
+    },
+    {
+      "name": "CartItem",
+      "type": "item",
+      "sortid": 5,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "cart_item",
+      "metadata": {
+        "files": [
+          "src/main/java/net/gabriele/vehicles/item/CartItemItem.java",
+          "src/main/resources/assets/vehicles/models/item/cart_item.json"
+        ]
+      }
+    },
+    {
+      "name": "Vehicles",
+      "type": "tab",
+      "sortid": 6,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "vehicles",
+      "metadata": {
+        "files": []
+      }
+    },
+    {
+      "name": "HorseAttached",
+      "type": "procedure",
+      "sortid": 7,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "horse_attached",
+      "metadata": {
+        "files": [
+          "src/main/java/net/gabriele/vehicles/procedures/HorseAttachedProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "sourceentity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
     }
   ],
   "variable_elements": [],
@@ -21,6 +134,9 @@
   "language_map": {
     "en_us": {
       "item.vehicles.cart_spawn_egg": "Cart Spawn Egg",
+      "item.vehicles.wooden_wheel": "Wooden Wheel",
+      "item.vehicles.cart_item": "Cart Item",
+      "item_group.vehicles.vehicles": "Vehicles",
       "entity.vehicles.cart": "Cart"
     }
   },

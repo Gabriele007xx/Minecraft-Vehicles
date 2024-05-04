@@ -10,11 +10,19 @@ import software.bernie.geckolib.core.animation.AnimatableManager;
 import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
 import software.bernie.geckolib.animatable.GeoEntity;
 
+import net.neoforged.neoforge.items.wrapper.EntityHandsInvWrapper;
+import net.neoforged.neoforge.items.wrapper.EntityArmorInvWrapper;
+import net.neoforged.neoforge.items.wrapper.CombinedInvWrapper;
+import net.neoforged.neoforge.items.ItemStackHandler;
+
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.attributes.Attributes;
@@ -28,16 +36,25 @@ import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.EntityDimensions;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.MenuProvider;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.EntityDataAccessor;
+import net.minecraft.network.chat.Component;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.nbt.Tag;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.BlockPos;
+
+import net.gabriele.vehicles.world.inventory.CartGUIMenu;
+
+import io.netty.buffer.Unpooled;
 
 public class CartEntity extends PathfinderMob implements GeoEntity {
 	public static final EntityDataAccessor<Boolean> SHOOT = SynchedEntityData.defineId(CartEntity.class, EntityDataSerializers.BOOLEAN);
@@ -117,9 +134,33 @@ public class CartEntity extends PathfinderMob implements GeoEntity {
 		return BuiltInRegistries.SOUND_EVENT.get(new ResourceLocation("entity.generic.death"));
 	}
 
+	private final ItemStackHandler inventory = new ItemStackHandler(9) {
+		@Override
+		public int getSlotLimit(int slot) {
+			return 64;
+		}
+	};
+	private final CombinedInvWrapper combined = new CombinedInvWrapper(inventory, new EntityHandsInvWrapper(this), new EntityArmorInvWrapper(this));
+
+	public CombinedInvWrapper getInventory() {
+		return combined;
+	}
+
+	@Override
+	protected void dropEquipment() {
+		super.dropEquipment();
+		for (int i = 0; i < inventory.getSlots(); ++i) {
+			ItemStack itemstack = inventory.getStackInSlot(i);
+			if (!itemstack.isEmpty() && !EnchantmentHelper.hasVanishingCurse(itemstack)) {
+				this.spawnAtLocation(itemstack);
+			}
+		}
+	}
+
 	@Override
 	public void addAdditionalSaveData(CompoundTag compound) {
 		super.addAdditionalSaveData(compound);
+		compound.put("InventoryCustom", inventory.serializeNBT());
 		compound.putString("Texture", this.getTexture());
 		compound.putBoolean("Dataloaded", this.entityData.get(DATA_loaded));
 	}
@@ -127,6 +168,9 @@ public class CartEntity extends PathfinderMob implements GeoEntity {
 	@Override
 	public void readAdditionalSaveData(CompoundTag compound) {
 		super.readAdditionalSaveData(compound);
+		Tag inventoryCustom = compound.get("InventoryCustom");
+		if (inventoryCustom instanceof CompoundTag inventoryTag)
+			inventory.deserializeNBT(inventoryTag);
 		if (compound.contains("Texture"))
 			this.setTexture(compound.getString("Texture"));
 		if (compound.contains("Dataloaded"))
@@ -137,6 +181,30 @@ public class CartEntity extends PathfinderMob implements GeoEntity {
 	public InteractionResult mobInteract(Player sourceentity, InteractionHand hand) {
 		ItemStack itemstack = sourceentity.getItemInHand(hand);
 		InteractionResult retval = InteractionResult.sidedSuccess(this.level().isClientSide());
+		if (sourceentity.isSecondaryUseActive()) {
+			if (sourceentity instanceof ServerPlayer serverPlayer) {
+				serverPlayer.openMenu(new MenuProvider() {
+					@Override
+					public Component getDisplayName() {
+						return Component.literal("Cart");
+					}
+
+					@Override
+					public AbstractContainerMenu createMenu(int id, Inventory inventory, Player player) {
+						FriendlyByteBuf packetBuffer = new FriendlyByteBuf(Unpooled.buffer());
+						packetBuffer.writeBlockPos(sourceentity.blockPosition());
+						packetBuffer.writeByte(0);
+						packetBuffer.writeVarInt(CartEntity.this.getId());
+						return new CartGUIMenu(id, inventory, packetBuffer);
+					}
+				}, buf -> {
+					buf.writeBlockPos(sourceentity.blockPosition());
+					buf.writeByte(0);
+					buf.writeVarInt(this.getId());
+				});
+			}
+			return InteractionResult.sidedSuccess(this.level().isClientSide());
+		}
 		super.mobInteract(sourceentity, hand);
 		sourceentity.startRiding(this);
 		return retval;

@@ -18,6 +18,9 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.network.FriendlyByteBuf;
 
+import net.gabriele.vehicles.init.VehiclesModTabs;
+import net.gabriele.vehicles.init.VehiclesModMenus;
+import net.gabriele.vehicles.init.VehiclesModItems;
 import net.gabriele.vehicles.init.VehiclesModEntities;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -38,7 +41,11 @@ public class VehiclesMod {
 		NeoForge.EVENT_BUS.register(this);
 		modEventBus.addListener(this::registerNetworking);
 
+		VehiclesModItems.register(modEventBus);
 		VehiclesModEntities.REGISTRY.register(modEventBus);
+		VehiclesModTabs.REGISTRY.register(modEventBus);
+
+		VehiclesModMenus.REGISTRY.register(modEventBus);
 
 		// Start of user code block mod init
 		// End of user code block mod init

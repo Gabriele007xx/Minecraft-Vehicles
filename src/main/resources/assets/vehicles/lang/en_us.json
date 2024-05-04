@@ -1,4 +1,7 @@
 {
   "item.vehicles.cart_spawn_egg": "Cart Spawn Egg",
+  "item.vehicles.wooden_wheel": "Wooden Wheel",
+  "item.vehicles.cart_item": "Cart Item",
+  "item_group.vehicles.vehicles": "Vehicles",
   "entity.vehicles.cart": "Cart"
 }
