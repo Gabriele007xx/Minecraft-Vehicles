@@ -2,7 +2,7 @@
 
 A mod that aims to add vehicles in Minecraft, both motorized and not!
 
-##Vehicles
+## Vehicles
 
 - Cart
 - - Has 8 slots.
