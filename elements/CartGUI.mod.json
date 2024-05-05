@@ -184,6 +184,39 @@
           "x": 276,
           "y": 98
         }
+      },
+      {
+        "type": "label",
+        "data": {
+          "name": "label_wheels",
+          "text": {
+            "fixedValue": "Wheels"
+          },
+          "color": {
+            "value": -12829636,
+            "falpha": 0.0
+          },
+          "x": 258,
+          "y": 44
+        }
+      },
+      {
+        "type": "inputslot",
+        "data": {
+          "inputLimit": {
+            "value": ""
+          },
+          "disablePlacement": {
+            "fixedValue": true
+          },
+          "id": 9,
+          "disablePickup": {
+            "fixedValue": true
+          },
+          "dropItemsWhenNotBound": true,
+          "x": 267,
+          "y": 62
+        }
       }
     ],
     "gridSettings": {

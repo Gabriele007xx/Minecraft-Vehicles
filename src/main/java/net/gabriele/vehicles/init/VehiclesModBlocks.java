@@ -10,12 +10,14 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.core.registries.BuiltInRegistries;
 
+import net.gabriele.vehicles.block.WorkshopBlock;
 import net.gabriele.vehicles.block.WheelReinforcerBlock;
 import net.gabriele.vehicles.VehiclesMod;
 
 public class VehiclesModBlocks {
 	public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(BuiltInRegistries.BLOCK, VehiclesMod.MODID);
 	public static final DeferredHolder<Block, Block> WHEEL_REINFORCER = REGISTRY.register("wheel_reinforcer", () -> new WheelReinforcerBlock());
+	public static final DeferredHolder<Block, Block> WORKSHOP = REGISTRY.register("workshop", () -> new WorkshopBlock());
 	// Start of user code block custom blocks
 	// End of user code block custom blocks
 }

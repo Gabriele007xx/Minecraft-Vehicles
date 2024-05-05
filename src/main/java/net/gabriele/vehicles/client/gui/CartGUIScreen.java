@@ -69,6 +69,7 @@ public class CartGUIScreen extends AbstractContainerScreen<CartGUIMenu> {
 
 	@Override
 	protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+		guiGraphics.drawString(this.font, Component.translatable("gui.vehicles.cart_gui.label_wheels"), 132, 7, -12829636, false);
 	}
 
 	@Override

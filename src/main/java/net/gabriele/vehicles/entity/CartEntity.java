@@ -17,6 +17,7 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 
 import net.minecraft.world.phys.Vec3;
 import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.item.ItemStack;
@@ -27,9 +28,11 @@ import net.minecraft.world.entity.ai.goal.RandomStrollGoal;
 import net.minecraft.world.entity.ai.goal.RandomLookAroundGoal;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
+import net.minecraft.world.entity.SpawnGroupData;
 import net.minecraft.world.entity.Pose;
 import net.minecraft.world.entity.PathfinderMob;
 import net.minecraft.world.entity.MobType;
+import net.minecraft.world.entity.MobSpawnType;
 import net.minecraft.world.entity.Mob;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.EntityType;
@@ -39,6 +42,7 @@ import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.MenuProvider;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionHand;
+import net.minecraft.world.DifficultyInstance;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.resources.ResourceLocation;
@@ -53,6 +57,10 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.core.BlockPos;
 
 import net.gabriele.vehicles.world.inventory.CartGUIMenu;
+import net.gabriele.vehicles.procedures.CartOnInitialEntitySpawnProcedure;
+import net.gabriele.vehicles.procedures.CartOnEntityTickUpdateProcedure;
+
+import javax.annotation.Nullable;
 
 import io.netty.buffer.Unpooled;
 
@@ -60,7 +68,7 @@ public class CartEntity extends PathfinderMob implements GeoEntity {
 	public static final EntityDataAccessor<Boolean> SHOOT = SynchedEntityData.defineId(CartEntity.class, EntityDataSerializers.BOOLEAN);
 	public static final EntityDataAccessor<String> ANIMATION = SynchedEntityData.defineId(CartEntity.class, EntityDataSerializers.STRING);
 	public static final EntityDataAccessor<String> TEXTURE = SynchedEntityData.defineId(CartEntity.class, EntityDataSerializers.STRING);
-	public static final EntityDataAccessor<Boolean> DATA_loaded = SynchedEntityData.defineId(CartEntity.class, EntityDataSerializers.BOOLEAN);
+	public static final EntityDataAccessor<String> DATA_paint = SynchedEntityData.defineId(CartEntity.class, EntityDataSerializers.STRING);
 	private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 	private boolean swinging;
 	private boolean lastloop;
@@ -81,7 +89,7 @@ public class CartEntity extends PathfinderMob implements GeoEntity {
 		this.entityData.define(SHOOT, false);
 		this.entityData.define(ANIMATION, "undefined");
 		this.entityData.define(TEXTURE, "cart");
-		this.entityData.define(DATA_loaded, false);
+		this.entityData.define(DATA_paint, "unpainted");
 	}
 
 	public void setTexture(String texture) {
@@ -134,6 +142,13 @@ public class CartEntity extends PathfinderMob implements GeoEntity {
 		return BuiltInRegistries.SOUND_EVENT.get(new ResourceLocation("entity.generic.death"));
 	}
 
+	@Override
+	public SpawnGroupData finalizeSpawn(ServerLevelAccessor world, DifficultyInstance difficulty, MobSpawnType reason, @Nullable SpawnGroupData livingdata, @Nullable CompoundTag tag) {
+		SpawnGroupData retval = super.finalizeSpawn(world, difficulty, reason, livingdata, tag);
+		CartOnInitialEntitySpawnProcedure.execute(this);
+		return retval;
+	}
+
 	private final ItemStackHandler inventory = new ItemStackHandler(9) {
 		@Override
 		public int getSlotLimit(int slot) {
@@ -162,7 +177,7 @@ public class CartEntity extends PathfinderMob implements GeoEntity {
 		super.addAdditionalSaveData(compound);
 		compound.put("InventoryCustom", inventory.serializeNBT());
 		compound.putString("Texture", this.getTexture());
-		compound.putBoolean("Dataloaded", this.entityData.get(DATA_loaded));
+		compound.putString("Datapaint", this.entityData.get(DATA_paint));
 	}
 
 	@Override
@@ -173,8 +188,8 @@ public class CartEntity extends PathfinderMob implements GeoEntity {
 			inventory.deserializeNBT(inventoryTag);
 		if (compound.contains("Texture"))
 			this.setTexture(compound.getString("Texture"));
-		if (compound.contains("Dataloaded"))
-			this.entityData.set(DATA_loaded, compound.getBoolean("Dataloaded"));
+		if (compound.contains("Datapaint"))
+			this.entityData.set(DATA_paint, compound.getString("Datapaint"));
 	}
 
 	@Override
@@ -213,6 +228,7 @@ public class CartEntity extends PathfinderMob implements GeoEntity {
 	@Override
 	public void baseTick() {
 		super.baseTick();
+		CartOnEntityTickUpdateProcedure.execute(this.level(), this.getX(), this.getY(), this.getZ(), this);
 		this.refreshDimensions();
 	}
 

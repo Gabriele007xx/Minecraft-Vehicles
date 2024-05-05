@@ -32,8 +32,10 @@ public class VehiclesModTabs {
 	public static void buildTabContentsVanilla(BuildCreativeModeTabContentsEvent tabData) {
 		if (tabData.getTabKey() == CreativeModeTabs.FUNCTIONAL_BLOCKS) {
 			tabData.accept(VehiclesModBlocks.WHEEL_REINFORCER.get().asItem());
+			tabData.accept(VehiclesModBlocks.WORKSHOP.get().asItem());
 		} else if (tabData.getTabKey() == CreativeModeTabs.INGREDIENTS) {
 			tabData.accept(VehiclesModItems.WOODEN_WHEEL.get());
+			tabData.accept(VehiclesModItems.REINFORCED_WHEEL.get());
 		}
 	}
 }

@@ -6,6 +6,6 @@ import net.minecraft.world.item.Item;
 
 public class WoodenWheelItem extends Item {
 	public WoodenWheelItem() {
-		super(new Item.Properties().stacksTo(64).rarity(Rarity.COMMON));
+		super(new Item.Properties().durability(60).rarity(Rarity.COMMON));
 	}
 }

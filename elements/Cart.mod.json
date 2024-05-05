@@ -14,9 +14,9 @@
     },
     "entityDataEntries": [
       {
-        "name": "loaded",
-        "type": "logic",
-        "value": false
+        "name": "paint",
+        "type": "string",
+        "value": "unpainted"
       }
     ],
     "modelWidth": 1.0,
@@ -106,6 +106,12 @@
     },
     "stepSound": {
       "value": "entity.horse.step"
+    },
+    "onMobTickUpdate": {
+      "name": "CartOnEntityTickUpdate"
+    },
+    "onInitialSpawn": {
+      "name": "CartOnInitialEntitySpawn"
     },
     "hasAI": true,
     "aiBase": "(none)",

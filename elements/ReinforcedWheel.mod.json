@@ -3,11 +3,11 @@
   "_type": "item",
   "definition": {
     "renderType": 0,
-    "texture": "woode_wheeel",
+    "texture": "reinforced_wooden_wheel",
     "customModelName": "Normal",
     "customProperties": {},
     "states": [],
-    "name": "Wooden Wheel",
+    "name": "Reinforced Wheel",
     "rarity": "COMMON",
     "creativeTab": {
       "value": "MATERIALS"
@@ -16,7 +16,7 @@
     "enchantability": 0,
     "useDuration": 0,
     "toolType": 1.0,
-    "damageCount": 60,
+    "damageCount": 0,
     "recipeRemainder": {
       "value": ""
     },

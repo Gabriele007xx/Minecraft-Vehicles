@@ -193,6 +193,91 @@
           "src/main/java/net/gabriele/vehicles/world/inventory/WheelReinforcerGUIMenu.java"
         ]
       }
+    },
+    {
+      "name": "CartOnInitialEntitySpawn",
+      "type": "procedure",
+      "sortid": 13,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "cart_on_initial_entity_spawn",
+      "metadata": {
+        "files": [
+          "src/main/java/net/gabriele/vehicles/procedures/CartOnInitialEntitySpawnProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "CartOnEntityTickUpdate",
+      "type": "procedure",
+      "sortid": 14,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "cart_on_entity_tick_update",
+      "metadata": {
+        "files": [
+          "src/main/java/net/gabriele/vehicles/procedures/CartOnEntityTickUpdateProcedure.java"
+        ],
+        "dependencies": [
+          {
+            "name": "entity",
+            "type": "entity"
+          },
+          {
+            "name": "x",
+            "type": "number"
+          },
+          {
+            "name": "y",
+            "type": "number"
+          },
+          {
+            "name": "z",
+            "type": "number"
+          },
+          {
+            "name": "world",
+            "type": "world"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ReinforcedWheel",
+      "type": "item",
+      "sortid": 15,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "reinforced_wheel",
+      "metadata": {
+        "files": [
+          "src/main/java/net/gabriele/vehicles/item/ReinforcedWheelItem.java",
+          "src/main/resources/assets/vehicles/models/item/reinforced_wheel.json"
+        ]
+      }
+    },
+    {
+      "name": "Workshop",
+      "type": "block",
+      "sortid": 16,
+      "compiles": true,
+      "locked_code": false,
+      "registry_name": "workshop",
+      "metadata": {
+        "files": [
+          "src/main/resources/assets/vehicles/models/block/workshop.json",
+          "src/main/resources/data/vehicles/loot_tables/blocks/workshop.json",
+          "src/main/resources/assets/vehicles/models/item/workshop.json",
+          "src/main/resources/assets/vehicles/blockstates/workshop.json",
+          "src/main/java/net/gabriele/vehicles/block/WorkshopBlock.java"
+        ]
+      }
     }
   ],
   "variable_elements": [],
@@ -200,15 +285,21 @@
   "tag_elements": {
     "BLOCKS:minecraft:mineable/pickaxe": [
       "~CUSTOM:WheelReinforcer"
+    ],
+    "BLOCKS:minecraft:mineable/axe": [
+      "~CUSTOM:Workshop"
     ]
   },
   "language_map": {
     "en_us": {
+      "item.vehicles.reinforced_wheel": "Reinforced Wheel",
       "item.vehicles.cart_spawn_egg": "Cart Spawn Egg",
       "gui.vehicles.wheel_reinforcer_gui.label_reinforce": "Reinforce",
+      "gui.vehicles.cart_gui.label_wheels": "Wheels",
       "item.vehicles.wooden_wheel": "Wooden Wheel",
       "item.vehicles.cart_item": "Cart Item",
       "item_group.vehicles.vehicles": "Vehicles",
+      "block.vehicles.workshop": "Workshop",
       "block.vehicles.wheel_reinforcer": "Wheel Reinforcer",
       "entity.vehicles.cart": "Cart",
       "entity.minecraft.villager.vehicles.charrioter": "Charrioter"
